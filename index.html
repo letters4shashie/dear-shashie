@@ -8,1975 +8,823 @@
   <!-- =========================
        FONTS
   ========================== -->
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap"
-    rel="stylesheet"
-  >
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
 
   <style>
-
     /* =====================================================
        COLOURS
     ===================================================== */
-
     :root {
-
       --pink-light: #fff5f7;
-
       --pink: #f7d6df;
-
       --pink-deep: #d9829a;
-
       --rose: #b85c78;
-
       --burgundy: #6e3045;
-
       --cream: #fffaf5;
-
       --text: #53363f;
-
       --soft-text: #76525d;
-
-      --shadow:
-        0 20px 60px rgba(139, 71, 91, 0.12);
-
+      --shadow: 0 20px 60px rgba(139, 71, 91, 0.12);
     }
-
 
     /* =====================================================
        BASIC RESET
     ===================================================== */
-
     * {
-
       box-sizing: border-box;
-
       margin: 0;
-
       padding: 0;
-
     }
-
 
     html {
-
       scroll-behavior: smooth;
-
     }
-
 
     body {
-
       background: var(--pink-light);
-
       color: var(--text);
-
       font-family: "DM Sans", sans-serif;
-
       overflow-x: hidden;
-
     }
-
 
     /* =====================================================
        FLOATING PETALS
     ===================================================== */
-
     .petals {
-
       position: fixed;
-
       inset: 0;
-
       pointer-events: none;
-
       overflow: hidden;
-
       z-index: 50;
-
     }
-
 
     .petal {
-
       position: absolute;
-
       top: -50px;
-
       width: 14px;
-
       height: 20px;
-
       background: #f2b8c8;
-
       border-radius: 80% 20% 80% 20%;
-
       opacity: .45;
-
       animation: fall linear infinite;
-
     }
 
-
-    .petal:nth-child(1) {
-
-      left: 8%;
-
-      animation-duration: 11s;
-
-    }
-
-
-    .petal:nth-child(2) {
-
-      left: 25%;
-
-      animation-duration: 14s;
-
-      animation-delay: 3s;
-
-      transform: scale(.7);
-
-    }
-
-
-    .petal:nth-child(3) {
-
-      left: 47%;
-
-      animation-duration: 12s;
-
-      animation-delay: 1s;
-
-      transform: scale(.9);
-
-    }
-
-
-    .petal:nth-child(4) {
-
-      left: 67%;
-
-      animation-duration: 16s;
-
-      animation-delay: 5s;
-
-      transform: scale(.65);
-
-    }
-
-
-    .petal:nth-child(5) {
-
-      left: 86%;
-
-      animation-duration: 13s;
-
-      animation-delay: 2s;
-
-      transform: scale(.8);
-
-    }
-
+    .petal:nth-child(1) { left: 8%; animation-duration: 11s; }
+    .petal:nth-child(2) { left: 25%; animation-duration: 14s; animation-delay: 3s; transform: scale(.7); }
+    .petal:nth-child(3) { left: 47%; animation-duration: 12s; animation-delay: 1s; transform: scale(.9); }
+    .petal:nth-child(4) { left: 67%; animation-duration: 16s; animation-delay: 5s; transform: scale(.65); }
+    .petal:nth-child(5) { left: 86%; animation-duration: 13s; animation-delay: 2s; transform: scale(.8); }
 
     @keyframes fall {
-
-      0% {
-
-        transform:
-          translateY(-50px)
-          rotate(0deg);
-
-      }
-
-      100% {
-
-        transform:
-          translateY(110vh)
-          translateX(100px)
-          rotate(500deg);
-
-      }
-
+      0% { transform: translateY(-50px) rotate(0deg); }
+      100% { transform: translateY(110vh) translateX(100px) rotate(500deg); }
     }
-
 
     /* =====================================================
        NAVIGATION
     ===================================================== */
-
     nav {
-
       position: absolute;
-
       top: 0;
-
       left: 0;
-
       width: 100%;
-
       z-index: 10;
-
       padding: 28px 7%;
-
       display: flex;
-
       justify-content: space-between;
-
       align-items: center;
-
     }
-
 
     .logo {
-
       font-family: "Parisienne", cursive;
-
       font-size: 30px;
-
       color: var(--burgundy);
-
     }
-
 
     nav a {
-
       text-decoration: none;
-
       color: var(--burgundy);
-
       font-size: 13px;
-
       letter-spacing: 1px;
-
       margin-left: 28px;
-
       cursor: pointer;
-
       transition: .25s ease;
-
     }
-
 
     nav a:hover {
-
       color: var(--rose);
-
     }
-
 
     /* =====================================================
        HERO
     ===================================================== */
-
     .hero {
-
       min-height: 100vh;
-
       position: relative;
-
       display: flex;
-
       justify-content: center;
-
       align-items: center;
-
       text-align: center;
-
       padding: 100px 24px;
-
       overflow: hidden;
-
       background:
-
-        radial-gradient(
-          circle at 15% 25%,
-          rgba(246, 188, 204, .35),
-          transparent 25%
-        ),
-
-        radial-gradient(
-          circle at 90% 75%,
-          rgba(238, 202, 212, .5),
-          transparent 28%
-        ),
-
+        radial-gradient(circle at 15% 25%, rgba(246, 188, 204, .35), transparent 25%),
+        radial-gradient(circle at 90% 75%, rgba(238, 202, 212, .5), transparent 28%),
         var(--pink-light);
-
     }
-
 
     .hero-flower {
-
       position: absolute;
-
       font-size: 150px;
-
       opacity: .13;
-
     }
 
-
-    .flower-one {
-
-      top: 7%;
-
-      left: 4%;
-
-      transform: rotate(-20deg);
-
-    }
-
-
-    .flower-two {
-
-      bottom: 5%;
-
-      right: 4%;
-
-      transform: rotate(25deg);
-
-    }
-
+    .flower-one { top: 7%; left: 4%; transform: rotate(-20deg); }
+    .flower-two { bottom: 5%; right: 4%; transform: rotate(25deg); }
 
     .hero-content {
-
       max-width: 800px;
-
       position: relative;
-
       z-index: 2;
-
     }
-
 
     .eyebrow {
-
       text-transform: uppercase;
-
       letter-spacing: 4px;
-
       font-size: 11px;
-
       color: var(--rose);
-
       margin-bottom: 22px;
-
     }
-
 
     h1 {
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: clamp(70px, 13vw, 150px);
-
       font-weight: 500;
-
       line-height: .75;
-
       color: var(--burgundy);
-
     }
-
 
     .script {
-
       font-family: "Parisienne", cursive;
-
       color: var(--pink-deep);
-
       font-size: clamp(48px, 8vw, 85px);
-
       display: block;
-
       margin-top: 25px;
-
     }
-
 
     .hero p {
-
       max-width: 560px;
-
       margin: 35px auto;
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: 22px;
-
       line-height: 1.6;
-
       color: var(--soft-text);
-
     }
-
 
     /* =====================================================
        BUTTONS
     ===================================================== */
-
     .button {
-
       display: inline-block;
-
       padding: 15px 28px;
-
       border-radius: 50px;
-
       background: var(--burgundy);
-
       color: white;
-
       text-decoration: none;
-
       font-size: 13px;
-
       letter-spacing: 1px;
-
-      box-shadow:
-        0 12px 30px rgba(110,48,69,.2);
-
+      box-shadow: 0 12px 30px rgba(110,48,69,.2);
       transition: .3s ease;
-
       border: none;
-
       cursor: pointer;
-
     }
-
 
     .button:hover {
-
       transform: translateY(-3px);
-
       background: var(--rose);
-
     }
-
 
     /* =====================================================
        INTRO
     ===================================================== */
-
     .intro {
-
       padding: 120px 8%;
-
       background: var(--cream);
-
       text-align: center;
-
     }
-
 
     .section-label {
-
       font-size: 11px;
-
       letter-spacing: 4px;
-
       text-transform: uppercase;
-
       color: var(--rose);
-
       margin-bottom: 18px;
-
     }
-
 
     .intro h2 {
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: clamp(42px, 6vw, 68px);
-
       font-weight: 500;
-
       color: var(--burgundy);
-
       margin-bottom: 25px;
-
     }
-
 
     .intro p {
-
       max-width: 620px;
-
       margin: auto;
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: 21px;
-
       line-height: 1.7;
-
       color: var(--soft-text);
-
     }
-
 
     /* =====================================================
        LETTERS PAGE
     ===================================================== */
-
     .letters {
-
       padding: 120px 7%;
-
       background: #fcebef;
-
       min-height: 80vh;
-
     }
-
 
     .letters-header {
-
       text-align: center;
-
       margin-bottom: 55px;
-
     }
-
 
     .letters-header h2 {
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: clamp(45px, 7vw, 70px);
-
       font-weight: 500;
-
       color: var(--burgundy);
-
     }
-
 
     .letters-description {
-
       margin-top: 12px;
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: 20px;
-
       color: var(--soft-text);
-
     }
-
 
     /* =====================================================
        BACK BUTTON
     ===================================================== */
-
     .back-button {
-
       display: inline-flex;
-
       align-items: center;
-
       gap: 8px;
-
       border: none;
-
       background: transparent;
-
       color: var(--burgundy);
-
       font-family: "DM Sans", sans-serif;
-
       font-size: 13px;
-
       cursor: pointer;
-
       padding: 10px 0;
-
       margin-bottom: 30px;
-
       transition: .25s ease;
-
     }
-
 
     .back-button:hover {
-
       color: var(--rose);
-
       transform: translateX(-4px);
-
     }
-
 
     /* =====================================================
        SECRET LETTER GRID
     ===================================================== */
-
     .letter-grid {
-
       max-width: 1100px;
-
       margin: auto;
-
       display: grid;
-
-      grid-template-columns:
-        repeat(auto-fit, minmax(230px, 1fr));
-
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 30px;
-
     }
-
 
     /* =====================================================
        SECRET LETTER CARD
     ===================================================== */
-
     .letter-card {
-
-      background:
-        linear-gradient(
-          145deg,
-          #fffafb,
-          #fff3f6
-        );
-
+      background: linear-gradient(145deg, #fffafb, #fff3f6);
       min-height: 250px;
-
       padding: 30px;
-
-      box-shadow:
-        0 15px 40px
-        rgba(139, 71, 91, 0.12);
-
+      box-shadow: 0 15px 40px rgba(139, 71, 91, 0.12);
       position: relative;
-
-      border:
-        1px solid
-        rgba(217, 130, 154, 0.18);
-
+      border: 1px solid rgba(217, 130, 154, 0.18);
       display: flex;
-
       flex-direction: column;
-
       justify-content: center;
-
       align-items: center;
-
       text-align: center;
-
       cursor: pointer;
-
-      transition:
-        transform .35s ease,
-        box-shadow .35s ease;
-
+      transition: transform .35s ease, box-shadow .35s ease;
       overflow: hidden;
-
     }
-
-
-    /* Diagonal envelope line */
 
     .letter-card::before {
-
       content: "";
-
       position: absolute;
-
       width: 130%;
-
       height: 1px;
-
-      background:
-        rgba(217, 130, 154, .20);
-
+      background: rgba(217, 130, 154, .20);
       top: 50%;
-
       transform: rotate(-13deg);
-
     }
-
-
-    /* Hearts across the top */
 
     .letter-card::after {
-
       content: "♡  ♡  ♡";
-
       position: absolute;
-
       top: 21px;
-
       left: 0;
-
       right: 0;
-
       color: var(--pink-deep);
-
       font-size: 17px;
-
       letter-spacing: 5px;
-
       opacity: .85;
-
     }
 
-
-    /* Alternating rotations */
-
-    .letter-card:nth-child(odd) {
-
-      transform: rotate(-1.5deg);
-
-    }
-
-
-    .letter-card:nth-child(even) {
-
-      transform: rotate(1.5deg);
-
-    }
-
+    .letter-card:nth-child(odd) { transform: rotate(-1.5deg); }
+    .letter-card:nth-child(even) { transform: rotate(1.5deg); }
 
     .letter-card:hover {
-
-      transform:
-        translateY(-10px)
-        rotate(0deg);
-
-      box-shadow:
-        0 25px 60px
-        rgba(139, 71, 91, 0.20);
-
+      transform: translateY(-10px) rotate(0deg);
+      box-shadow: 0 25px 60px rgba(139, 71, 91, 0.20);
     }
-
-
-    /* Number */
 
     .letter-number {
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: 58px;
-
       font-weight: 500;
-
       color: var(--burgundy);
-
       letter-spacing: 3px;
-
       position: relative;
-
       z-index: 2;
-
     }
-
-
-    /* Hearts underneath number */
 
     .letter-number::after {
-
       content: "♡ ♡";
-
       display: block;
-
       font-family: "DM Sans", sans-serif;
-
       font-size: 15px;
-
       color: var(--pink-deep);
-
       letter-spacing: 5px;
-
       margin-top: 10px;
-
     }
-
-
-    /* Secret hint */
 
     .secret-hint {
-
       margin-top: 20px;
-
       font-size: 10px;
-
       letter-spacing: 2px;
-
       text-transform: uppercase;
-
       color: #c59ca8;
-
       opacity: .8;
-
       position: relative;
-
       z-index: 2;
-
     }
-
 
     /* =====================================================
        EMPTY LETTER STATE
     ===================================================== */
-
     .empty-state {
-
       max-width: 600px;
-
       margin: 50px auto;
-
       text-align: center;
-
       display: none;
-
     }
-
 
     .empty-flower {
-
       font-size: 70px;
-
       opacity: .6;
-
       margin-bottom: 20px;
-
     }
-
 
     .empty-state h3 {
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: 35px;
-
       color: var(--burgundy);
-
       font-weight: 500;
-
     }
-
 
     .empty-state p {
-
       margin-top: 10px;
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: 18px;
-
       color: var(--soft-text);
-
     }
-
 
     /* =====================================================
        WRITE LETTER PAGE
     ===================================================== */
-
     .write {
-
       padding: 120px 24px;
-
       background: var(--cream);
-
       min-height: 100vh;
-
     }
-
 
     .form-wrapper {
-
       max-width: 700px;
-
       margin: auto;
-
       background: #fff;
-
-      padding:
-        clamp(30px, 7vw, 65px);
-
+      padding: clamp(30px, 7vw, 65px);
       box-shadow: var(--shadow);
-
       position: relative;
-
     }
-
 
     .form-wrapper::after {
-
       content: "🌸";
-
       position: absolute;
-
       right: 25px;
-
       bottom: 20px;
-
       opacity: .18;
-
       font-size: 80px;
-
       pointer-events: none;
-
     }
-
 
     .form-wrapper h2 {
-
       text-align: center;
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: 52px;
-
       font-weight: 500;
-
       color: var(--burgundy);
-
     }
-
 
     .form-wrapper .subtitle {
-
       text-align: center;
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: 18px;
-
       color: #87636d;
-
-      margin:
-        12px 0 35px;
-
+      margin: 12px 0 35px;
     }
-
 
     label {
-
       display: block;
-
       font-size: 11px;
-
       letter-spacing: 2px;
-
       text-transform: uppercase;
-
       color: var(--rose);
-
       margin: 22px 0 9px;
-
     }
 
-
-    input,
-    textarea {
-
+    input, textarea {
       width: 100%;
-
       border: none;
-
-      border-bottom:
-        1px solid #e7cbd3;
-
+      border-bottom: 1px solid #e7cbd3;
       background: transparent;
-
       padding: 12px 2px;
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: 19px;
-
       color: var(--text);
-
       outline: none;
-
       transition: border .3s;
-
     }
 
-
-    input:focus,
-    textarea:focus {
-
+    input:focus, textarea:focus {
       border-color: var(--rose);
-
     }
-
 
     textarea {
-
       min-height: 190px;
-
       resize: vertical;
-
     }
-
 
     .submit {
-
       display: block;
-
       margin: 35px auto 0;
-
       border: none;
-
       cursor: pointer;
-
       padding: 15px 35px;
-
       border-radius: 50px;
-
       background: var(--burgundy);
-
       color: white;
-
       font-family: "DM Sans", sans-serif;
-
       letter-spacing: 1px;
-
       transition: .3s ease;
-
     }
-
 
     .submit:hover {
-
       background: var(--rose);
-
       transform: translateY(-2px);
-
     }
-
 
     /* =====================================================
        LETTER POPUP
     ===================================================== */
-
     .modal {
-
       position: fixed;
-
       inset: 0;
-
-      background:
-        rgba(73, 35, 49, .42);
-
+      background: rgba(73, 35, 49, .42);
       backdrop-filter: blur(8px);
-
       z-index: 100;
-
       display: none;
-
       align-items: center;
-
       justify-content: center;
-
       padding: 25px;
-
     }
-
 
     .modal.show {
-
       display: flex;
-
     }
-
 
     .letter-paper {
-
       width: min(700px, 100%);
-
       max-height: 85vh;
-
       overflow-y: auto;
-
       background: #fffdf9;
-
-      padding:
-        clamp(35px, 7vw, 65px);
-
+      padding: clamp(35px, 7vw, 65px);
       position: relative;
-
-      box-shadow:
-        0 30px 90px
-        rgba(50, 20, 30, .25);
-
-      animation:
-        paperIn .35s ease;
-
+      box-shadow: 0 30px 90px rgba(50, 20, 30, .25);
+      animation: paperIn .35s ease;
     }
-
 
     @keyframes paperIn {
-
-      from {
-
-        opacity: 0;
-
-        transform:
-          translateY(25px)
-          scale(.97);
-
-      }
-
-      to {
-
-        opacity: 1;
-
-        transform:
-          translateY(0)
-          scale(1);
-
-      }
-
+      from { opacity: 0; transform: translateY(25px) scale(.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
-
 
     .close-modal {
-
       position: absolute;
-
       top: 18px;
-
       right: 22px;
-
       border: none;
-
       background: transparent;
-
       color: var(--burgundy);
-
       font-size: 27px;
-
       cursor: pointer;
-
     }
-
 
     .modal-number {
-
       font-size: 11px;
-
       letter-spacing: 3px;
-
       text-transform: uppercase;
-
       color: #b89ba4;
-
       margin-bottom: 12px;
-
     }
-
 
     .modal-name {
-
       font-family: "Parisienne", cursive;
-
       color: var(--rose);
-
       font-size: 40px;
-
       margin-bottom: 25px;
-
     }
-
 
     .modal-message {
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: 21px;
-
       line-height: 1.8;
-
       white-space: pre-wrap;
-
       color: #60434c;
-
     }
-
 
     .modal-signature {
-
       margin-top: 35px;
-
       font-family: "Parisienne", cursive;
-
       font-size: 27px;
-
       color: var(--burgundy);
-
     }
-
 
     /* =====================================================
        EDIT / UNSEND BUTTONS
     ===================================================== */
-
     .letter-actions {
-
       display: flex;
-
       justify-content: center;
-
       align-items: center;
-
       gap: 12px;
-
       margin-top: 35px;
-
       padding-top: 25px;
-
-      border-top:
-        1px solid #efdce1;
-
+      border-top: 1px solid #efdce1;
     }
-
 
     .letter-action-button {
-
       border: none;
-
       cursor: pointer;
-
       padding: 11px 18px;
-
       border-radius: 30px;
-
       font-family: "DM Sans", sans-serif;
-
       font-size: 11px;
-
       letter-spacing: .5px;
-
       transition: .25s ease;
-
     }
-
 
     .edit-letter-button {
-
       background: #f7d6df;
-
       color: var(--burgundy);
-
     }
-
 
     .edit-letter-button:hover {
-
       background: var(--pink-deep);
-
       color: white;
-
       transform: translateY(-2px);
-
     }
-
 
     .delete-letter-button {
-
       background: #fff0f3;
-
       color: #a95b72;
-
     }
-
 
     .delete-letter-button:hover {
-
       background: #f3c5d1;
-
       color: var(--burgundy);
-
       transform: translateY(-2px);
-
     }
-
 
     /* =====================================================
        CLOSING
     ===================================================== */
-
     .closing {
-
       min-height: 65vh;
-
       padding: 100px 24px;
-
       display: flex;
-
       justify-content: center;
-
       align-items: center;
-
       text-align: center;
-
       background: #f5d8df;
-
     }
-
 
     .closing h2 {
-
       font-family: "Parisienne", cursive;
-
-      font-size:
-        clamp(55px, 9vw, 100px);
-
+      font-size: clamp(55px, 9vw, 100px);
       color: var(--burgundy);
-
       font-weight: 400;
-
     }
-
 
     .closing p {
-
       font-family: "Cormorant Garamond", serif;
-
       font-size: 22px;
-
       margin-top: 15px;
-
       color: #704651;
-
     }
-
 
     /* =====================================================
        FOOTER
     ===================================================== */
-
     footer {
-
       text-align: center;
-
       padding: 25px;
-
       background: var(--burgundy);
-
       color: #f7dce3;
-
       font-size: 11px;
-
       letter-spacing: 2px;
-
     }
-
 
     /* =====================================================
        MOBILE
     ===================================================== */
-
     @media (max-width: 600px) {
-
-      nav {
-
-        padding: 20px;
-
-      }
-
-
-      nav div:last-child {
-
-        display: none;
-
-      }
-
-
-      .hero {
-
-        min-height: 90vh;
-
-      }
-
-
-      .hero p {
-
-        font-size: 19px;
-
-      }
-
-
-      .letters,
-      .write {
-
-        padding-left: 20px;
-
-        padding-right: 20px;
-
-      }
-
-
-      .letter-grid {
-
-        grid-template-columns: 1fr;
-
-      }
-
-
-      .letter-card {
-
-        min-height: 220px;
-
-        transform: none !important;
-
-      }
-
-
-      .modal {
-
-        padding: 15px;
-
-      }
-
-
-      .modal-message {
-
-        font-size: 19px;
-
-      }
-
-
-      .letter-actions {
-
-        flex-direction: column;
-
-      }
-
-
-      .letter-action-button {
-
-        width: 100%;
-
-      }
-
+      nav { padding: 20px; }
+      nav div:last-child { display: none; }
+      .hero { min-height: 90vh; }
+      .hero p { font-size: 19px; }
+      .letters, .write { padding-left: 20px; padding-right: 20px; }
+      .letter-grid { grid-template-columns: 1fr; }
+      .letter-card { min-height: 220px; transform: none !important; }
+      .modal { padding: 15px; }
+      .modal-message { font-size: 19px; }
+      .letter-actions { flex-direction: column; }
+      .letter-action-button { width: 100%; }
     }
-
   </style>
-
 </head>
 
-
 <body>
-
 
   <!-- =====================================================
        FLOATING PETALS
   ====================================================== -->
-
   <div class="petals">
-
     <span class="petal"></span>
-
     <span class="petal"></span>
-
     <span class="petal"></span>
-
     <span class="petal"></span>
-
     <span class="petal"></span>
-
   </div>
-
 
   <!-- =====================================================
        NAVIGATION
   ====================================================== -->
-
   <nav>
-
-    <div class="logo">
-
-      dear shashie ♡
-
-    </div>
-
-
+    <div class="logo">dear shashie ♡</div>
     <div>
-
-      <a onclick="showLetters()">
-
-        letters
-
-      </a>
-
-
-      <a onclick="showWrite()">
-
-        write one
-
-      </a>
-
+      <a onclick="showLetters()">letters</a>
+      <a onclick="showWrite()">write one</a>
     </div>
-
   </nav>
-
 
   <!-- =====================================================
        HERO
   ====================================================== -->
-
   <section class="hero" id="home">
-
-    <div class="hero-flower flower-one">
-
-      🌸
-
-    </div>
-
-
-    <div class="hero-flower flower-two">
-
-      🌸
-
-    </div>
-
-
+    <div class="hero-flower flower-one">🌸</div>
+    <div class="hero-flower flower-two">🌸</div>
     <div class="hero-content">
-
-      <div class="eyebrow">
-
-        hi Shashie babie, Happy Graduation !!
-
-      </div>
-
-
-      <h1>
-
-        Dear
-
-        <span class="script">
-
-          Shashie
-
-        </span>
-
-      </h1>
-
-
-      <p>
-
-        Here's a little something made with love from the people who are lucky enough to know you.
-
-      </p>
-
-
-      <button
-        class="button"
-        onclick="showLetters()"
-      >
-
-        Open your letters ♡
-
-      </button>
-
+      <div class="eyebrow">hi Shashie babie, Happy Graduation !!</div>
+      <h1>Dear <span class="script">Shashie</span></h1>
+      <p>Here's a little something made with love from the people who are lucky enough to know you.</p>
+      <button class="button" onclick="showLetters()">Open your letters ♡</button>
     </div>
-
   </section>
-
 
   <!-- =====================================================
        INTRO
   ====================================================== -->
-
   <section class="intro">
-
-    <div class="section-label">
-
-      For someone very special
-
-    </div>
-
-
-    <h2>
-
-      Our<br>
-
-      Shashie
-
-    </h2>
-
-
-    <p>
-
-      So we gathered the words that sometimes get left
-      unsaid — the little thank-yous, the inside jokes,
-      the memories, the wishes, and the reminders of
-      just how loved you are.
-
-    </p>
-
+    <div class="section-label">For someone very special</div>
+    <h2>Our<br>Shashie</h2>
+    <p>So we gathered the words that sometimes get left unsaid — the little thank-yous, the inside jokes, the memories, the wishes, and the reminders of just how loved you are.</p>
   </section>
-
 
   <!-- =====================================================
        LETTERS
   ====================================================== -->
-
-  <section
-    class="letters"
-    id="letters"
-  >
-
-
-    <button
-      class="back-button"
-      onclick="goHome()"
-    >
-
-      ← back home
-
-    </button>
-
-
+  <section class="letters" id="letters">
+    <button class="back-button" onclick="goHome()">← back home</button>
     <div class="letters-header">
-
-      <div class="section-label">
-
-        kitorg sayang sasi so mac, so we present you...
-
-      </div>
-
-
-      <h2>
-
-        Letters For Shashie ♡
-
-      </h2>
-
-
-      <p class="letters-description">
-
-        may this be your secret garden in your mind ♡
-
-      </p>
-
+      <div class="section-label">kitorg sayang sasi so mac, so we present you...</div>
+      <h2>Letters For Shashie ♡</h2>
+      <p class="letters-description">may this be your secret garden in your mind ♡</p>
     </div>
 
+    <div class="letter-grid" id="letterGrid"></div>
 
-    <!-- =================================================
-         LETTER CARDS APPEAR HERE
-    ================================================== -->
-
-    <div
-      class="letter-grid"
-      id="letterGrid"
-    >
-
-    </div>
-
-
-    <!-- =================================================
-         EMPTY STATE
-    ================================================== -->
-
-    <div
-      class="empty-state"
-      id="emptyState"
-    >
-
-      <div class="empty-flower">
-
-        🌸
-
-      </div>
-
-
-      <h3>
-
-        The first letter is waiting.
-
-      </h3>
-
-
-      <p>
-
-        Be the first person to leave Shashie
-        a little piece of love.
-
-      </p>
-
-
+    <div class="empty-state" id="emptyState">
+      <div class="empty-flower">🌸</div>
+      <h3>The first letter is waiting.</h3>
+      <p>Be the first person to leave Shashie a little piece of love.</p>
       <br>
-
-
-      <button
-        class="button"
-        onclick="showWrite()"
-      >
-
-        Write the first letter ♡
-
-      </button>
-
+      <button class="button" onclick="showWrite()">Write the first letter ♡</button>
     </div>
 
-
-    <!-- =================================================
-         ADD LETTER BUTTON
-    ================================================== -->
-
-    <div
-      style="
-        text-align:center;
-        margin-top:55px;
-      "
-    >
-
-      <button
-        class="button"
-        onclick="showWrite()"
-      >
-
-        + write a letter
-
-      </button>
-
+    <div style="text-align:center; margin-top:55px;">
+      <button class="button" onclick="showWrite()">+ write a letter</button>
     </div>
-
   </section>
-
 
   <!-- =====================================================
        WRITE LETTER
   ====================================================== -->
-
-  <section
-    class="write"
-    id="write"
-  >
-
-
-    <button
-      class="back-button"
-      onclick="showLetters()"
-    >
-
-      ← back to letters
-
-    </button>
-
-
+  <section class="write" id="write">
+    <button class="back-button" onclick="showLetters()">← back to letters</button>
     <div class="form-wrapper">
-
-
-      <h2>
-
-        Write to Shashie
-
-      </h2>
-
-
-      <p class="subtitle">
-
-        Leave her a little piece of your heart.
-
-      </p>
-
-
+      <h2>Write to Shashie</h2>
+      <p class="subtitle">Leave her a little piece of your heart.</p>
       <form id="letterForm">
-
-
-        <label for="name">
-
-          Your name
-
-        </label>
-
-
-        <input
-          id="name"
-          type="text"
-          placeholder="e.g. Sarah"
-          maxlength="60"
-          required
-        >
-
-
-        <label for="message">
-
-          Your letter
-
-        </label>
-
-
-        <textarea
-          id="message"
-          placeholder="Dear Shashie..."
-          maxlength="5000"
-          required
-        ></textarea>
-
-
-        <button
-          class="submit"
-          type="submit"
-        >
-
-          Leave your letter ♡
-
-        </button>
-
+        <label for="name">Your name</label>
+        <input id="name" type="text" placeholder="e.g. Sarah" maxlength="60" required>
+        <label for="message">Your letter</label>
+        <textarea id="message" placeholder="Dear Shashie..." maxlength="5000" required></textarea>
+        <button class="submit" type="submit">Leave your letter ♡</button>
       </form>
-
     </div>
-
   </section>
-
 
   <!-- =====================================================
        CLOSING
   ====================================================== -->
-
   <section class="closing">
-
     <div>
-
-      <h2>
-
-        For you, Shashie.
-
-      </h2>
-
-
-      <p>
-
-        May you always know how deeply you are loved.
-
-      </p>
-
+      <h2>For you, Shashie.</h2>
+      <p>May you always know how deeply you are loved.</p>
     </div>
-
   </section>
-
 
   <!-- =====================================================
        FOOTER
   ====================================================== -->
-
-  <footer>
-
-    made with love, tmf (tmt & mf) ♡
-
-  </footer>
-
+  <footer>made with love, tmf (tmt & mf) ♡</footer>
 
   <!-- =====================================================
        LETTER POPUP
   ====================================================== -->
-
-  <div
-    class="modal"
-    id="letterModal"
-    onclick="closeModalOutside(event)"
-  >
-
-
+  <div class="modal" id="letterModal" onclick="closeModalOutside(event)">
     <div class="letter-paper">
-
-
-      <button
-        class="close-modal"
-        onclick="closeLetter()"
-        aria-label="Close letter"
-      >
-
-        ×
-
-      </button>
-
-
-      <div
-        class="modal-number"
-        id="modalNumber"
-      ></div>
-
-
-      <div
-        class="modal-name"
-        id="modalName"
-      ></div>
-
-
-      <div
-        class="modal-message"
-        id="modalMessage"
-      ></div>
-
-
-      <div class="modal-signature">
-
-        with love ♡
-
-      </div>
-
-
-      <!-- =================================================
-           EDIT / UNSEND
-    ================================================== -->
+      <button class="close-modal" onclick="closeLetter()" aria-label="Close letter">×</button>
+      <div class="modal-number" id="modalNumber"></div>
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-message" id="modalMessage"></div>
+      <div class="modal-signature">with love ♡</div>
 
       <div class="letter-actions">
-
-        <button
-          type="button"
-          class="letter-action-button edit-letter-button"
-          onclick="editCurrentLetter()"
-        >
-
-          ✏️ edit letter
-
-        </button>
-
-
-        <button
-          type="button"
-          class="letter-action-button delete-letter-button"
-          onclick="deleteCurrentLetter()"
-        >
-
-          🗑️ unsend letter
-
-        </button>
-
+        <button type="button" class="letter-action-button edit-letter-button" onclick="editCurrentLetter()">✏️ edit letter</button>
+        <button type="button" class="letter-action-button delete-letter-button" onclick="deleteCurrentLetter()">🗑️ unsend letter</button>
       </div>
-
     </div>
-
   </div>
 
-
   <!-- =====================================================
-       JAVASCRIPT (FIREBASE CONNECTED)
+       FIREBASE & JAVASCRIPT
   ====================================================== -->
-
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.x.x/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.x.x/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyAAUROMmSBP-JwtSaVR9cY3L1KqqNK9NOQ",
+      apiKey: "AIzaSyAAuROMmSBP-JwTsaVR9cY3L1KqqNK9NOQ",
       authDomain: "dear-shashie.firebaseapp.com",
       projectId: "dear-shashie",
       storageBucket: "dear-shashie.firebasestorage.app",
       messagingSenderId: "25586403150",
       appId: "1:25586403150:web:84f59e44d32850a8c8801f",
-      measurementId: "G-LBP7B9LN68"
+      measurementId: "G-LBP7B9LN6B"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -1990,14 +838,14 @@
       document.getElementById("letters").style.display = "none";
       document.getElementById("write").style.display = "none";
       document.querySelector(".closing").style.display = "none";
-    };
+    }
 
-    window.showLetters = function() {
+    window.showLetters = async function() {
       hideAllPages();
       document.getElementById("letters").style.display = "block";
-      renderLetters();
+      await renderLetters();
       window.scrollTo({ top: 0, behavior: "smooth" });
-    };
+    }
 
     window.showWrite = function() {
       hideAllPages();
@@ -2006,7 +854,7 @@
       setTimeout(function() {
         document.getElementById("name").focus();
       }, 300);
-    };
+    }
 
     window.goHome = function() {
       hideAllPages();
@@ -2014,16 +862,17 @@
       document.querySelector(".intro").style.display = "block";
       document.querySelector(".closing").style.display = "flex";
       window.scrollTo({ top: 0, behavior: "smooth" });
-    };
+    }
 
     async function getLetters() {
       try {
         const querySnapshot = await getDocs(collection(db, "letters"));
         let letters = [];
         querySnapshot.forEach((docSnap) => {
-          letters.push({ firebaseId: docSnap.id, ...docSnap.data() });
+          letters.push({ id: docSnap.id, ...docSnap.data() });
         });
-        letters.sort((a, b) => a.id - b.id);
+        // Sort by timestamp or creation order if saved, otherwise keep as is
+        letters.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
         return letters;
       } catch (error) {
         console.error("Error getting letters: ", error);
@@ -2033,52 +882,39 @@
 
     document.getElementById("letterForm").addEventListener("submit", async function(event) {
       event.preventDefault();
-
       const name = document.getElementById("name").value.trim();
       const message = document.getElementById("message").value.trim();
-
       if (!name || !message) return;
 
-      const editingFirebaseId = this.dataset.editingFirebaseId;
+      const editingId = this.dataset.editingId;
 
-      if (editingFirebaseId) {
-        try {
-          await updateDoc(doc(db, "letters", editingFirebaseId), {
-            name: name,
-            message: message
-          });
-          delete this.dataset.editingFirebaseId;
-        } catch (error) {
-          console.error("Error updating document: ", error);
-        }
-      } else {
-        try {
-          const newLetter = {
-            id: Date.now(),
+      try {
+        if (editingId) {
+          const letterRef = doc(db, "letters", editingId);
+          await updateDoc(letterRef, { name: name, message: message });
+          delete this.dataset.editingId;
+        } else {
+          await addDoc(collection(db, "letters"), {
             name: name,
             message: message,
-            date: new Date().toLocaleDateString(undefined, {
-              year: "numeric",
-              month: "long",
-              day: "numeric"
-            })
-          };
-          await addDoc(collection(db, "letters"), newLetter);
-        } catch (error) {
-          console.error("Error adding document: ", error);
+            createdAt: Date.now()
+          });
         }
-      }
 
-      this.reset();
-      document.querySelector(".submit").textContent = "Leave your letter ♡";
-      showLetters();
+        this.reset();
+        document.querySelector(".submit").textContent = "Leave your letter ♡";
+        showLetters();
+      } catch (error) {
+        console.error("Error saving letter: ", error);
+        alert("Oops! Something went wrong saving your letter.");
+      }
     });
 
-    window.renderLetters = async function() {
+    async function renderLetters() {
       const grid = document.getElementById("letterGrid");
       const empty = document.getElementById("emptyState");
-
       const letters = await getLetters();
+
       grid.innerHTML = "";
 
       if (letters.length === 0) {
@@ -2109,24 +945,21 @@
 
         grid.appendChild(card);
       });
-    };
+    }
 
     window.openLetter = function(letter) {
-      currentLetterId = letter.firebaseId;
-
+      currentLetterId = letter.id;
       document.getElementById("modalNumber").textContent = "a letter for shashie ♡";
       document.getElementById("modalName").textContent = "from " + letter.name;
       document.getElementById("modalMessage").textContent = letter.message;
       document.getElementById("letterModal").classList.add("show");
       document.body.style.overflow = "hidden";
-    };
+    }
 
     window.editCurrentLetter = async function() {
-      if (!currentLetterId) return;
-
+      if (currentLetterId === null) return;
       const letters = await getLetters();
-      const letter = letters.find(item => item.firebaseId === currentLetterId);
-
+      const letter = letters.find(item => item.id === currentLetterId);
       if (!letter) return;
 
       closeLetter();
@@ -2134,13 +967,12 @@
 
       document.getElementById("name").value = letter.name;
       document.getElementById("message").value = letter.message;
-      document.getElementById("letterForm").dataset.editingFirebaseId = letter.firebaseId;
+      document.getElementById("letterForm").dataset.editingId = letter.id;
       document.querySelector(".submit").textContent = "Save changes ♡";
-    };
+    }
 
     window.deleteCurrentLetter = async function() {
-      if (!currentLetterId) return;
-
+      if (currentLetterId === null) return;
       const confirmed = confirm("Are you sure you want to unsend this letter? ♡\n\nThis cannot be undone.");
       if (!confirmed) return;
 
@@ -2148,22 +980,23 @@
         await deleteDoc(doc(db, "letters", currentLetterId));
         currentLetterId = null;
         closeLetter();
-        renderLetters();
+        showLetters();
       } catch (error) {
-        console.error("Error removing document: ", error);
+        console.error("Error deleting letter: ", error);
+        alert("Could not delete the letter.");
       }
-    };
+    }
 
     window.closeLetter = function() {
       document.getElementById("letterModal").classList.remove("show");
       document.body.style.overflow = "";
-    };
+    }
 
     window.closeModalOutside = function(event) {
       if (event.target === document.getElementById("letterModal")) {
         closeLetter();
       }
-    };
+    }
 
     document.addEventListener("keydown", function(event) {
       if (event.key === "Escape") {
@@ -2171,6 +1004,7 @@
       }
     });
 
+    // Initial check
     document.getElementById("letters").style.display = "none";
     document.getElementById("write").style.display = "none";
   </script>
