@@ -2764,6 +2764,28 @@
       .getElementById("write")
       .style.display = "none";
 
+<!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.x.x/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.x.x/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAAUROMmSBP-JwtSaVR9cY3L1KqqNK9NOQ",
+      authDomain: "dear-shashie.firebaseapp.com",
+      projectId: "dear-shashie",
+      storageBucket: "dear-shashie.firebasestorage.app",
+      messagingSenderId: "25586403150",
+      appId: "1:25586403150:web:84f59e44d32850a8c8801f",
+      measurementId: "G-LBP7B9LN68"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // [Your existing JavaScript functions like showLetters(), getLetters(), etc., go right below here]
 
   </script>
 
