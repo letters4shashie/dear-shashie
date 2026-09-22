@@ -1962,815 +1962,12 @@
 
 
   <!-- =====================================================
-       JAVASCRIPT
-  ====================================================== -->
-
-  <script>
-
-
-    /* =====================================================
-       STORAGE
-    =====================================================
-
-       Letters are currently stored in the browser.
-
-       They survive refreshing and closing the browser.
-
-       NOTE:
-       For letters to be shared between different people's
-       devices, the website will eventually need an online
-       database.
-
-    ===================================================== */
-
-
-    const STORAGE_KEY =
-      "dearShashieLetters";
-
-
-    /* =====================================================
-       CURRENT LETTER
-    ===================================================== */
-
-    let currentLetterId = null;
-
-
-    /* =====================================================
-       PAGE NAVIGATION
-    ===================================================== */
-
-    function hideAllPages() {
-
-      document
-        .getElementById("home")
-        .style.display = "none";
-
-
-      document
-        .querySelector(".intro")
-        .style.display = "none";
-
-
-      document
-        .getElementById("letters")
-        .style.display = "none";
-
-
-      document
-        .getElementById("write")
-        .style.display = "none";
-
-
-      document
-        .querySelector(".closing")
-        .style.display = "none";
-
-    }
-
-
-    /* =====================================================
-       SHOW LETTERS
-    ===================================================== */
-
-    function showLetters() {
-
-      hideAllPages();
-
-
-      document
-        .getElementById("letters")
-        .style.display = "block";
-
-
-      renderLetters();
-
-
-      window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-      });
-
-    }
-
-
-    /* =====================================================
-       SHOW WRITE PAGE
-    ===================================================== */
-
-    function showWrite() {
-
-      hideAllPages();
-
-
-      document
-        .getElementById("write")
-        .style.display = "block";
-
-
-      window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-      });
-
-
-      setTimeout(function() {
-
-        document
-          .getElementById("name")
-          .focus();
-
-      }, 300);
-
-    }
-
-
-    /* =====================================================
-       GO HOME
-    ===================================================== */
-
-    function goHome() {
-
-      hideAllPages();
-
-
-      document
-        .getElementById("home")
-        .style.display = "flex";
-
-
-      document
-        .querySelector(".intro")
-        .style.display = "block";
-
-
-      document
-        .querySelector(".closing")
-        .style.display = "flex";
-
-
-      window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-      });
-
-    }
-
-
-    /* =====================================================
-       GET LETTERS
-    ===================================================== */
-
-    function getLetters() {
-
-      const saved =
-        localStorage.getItem(STORAGE_KEY);
-
-
-      if (!saved) {
-
-        return [];
-
-      }
-
-
-      try {
-
-        return JSON.parse(saved);
-
-      }
-
-      catch (error) {
-
-        return [];
-
-      }
-
-    }
-
-
-    /* =====================================================
-       SAVE LETTERS
-    ===================================================== */
-
-    function saveLetters(letters) {
-
-      localStorage.setItem(
-
-        STORAGE_KEY,
-
-        JSON.stringify(letters)
-
-      );
-
-    }
-
-
-    /* =====================================================
-       SUBMIT / EDIT LETTER
-    ===================================================== */
-
-    document
-      .getElementById("letterForm")
-      .addEventListener(
-        "submit",
-        function(event) {
-
-
-          event.preventDefault();
-
-
-          const name =
-
-            document
-              .getElementById("name")
-              .value
-              .trim();
-
-
-          const message =
-
-            document
-              .getElementById("message")
-              .value
-              .trim();
-
-
-          if (!name || !message) {
-
-            return;
-
-          }
-
-
-          let letters =
-            getLetters();
-
-
-          /*
-            Check if we are editing
-            an existing letter.
-          */
-
-          const editingId =
-            this.dataset.editingId;
-
-
-          if (editingId) {
-
-
-            /* =========================
-               EDIT EXISTING LETTER
-            ========================== */
-
-            const index =
-              letters.findIndex(
-                function(letter) {
-
-                  return String(letter.id) ===
-                    String(editingId);
-
-                }
-              );
-
-
-            if (index !== -1) {
-
-              letters[index].name =
-                name;
-
-              letters[index].message =
-                message;
-
-            }
-
-
-            /*
-              Remove editing mode.
-            */
-
-            delete this.dataset.editingId;
-
-
-          }
-
-          else {
-
-
-            /* =========================
-               CREATE NEW LETTER
-            ========================== */
-
-            const newLetter = {
-
-              id: Date.now(),
-
-              name: name,
-
-              message: message,
-
-              date:
-                new Date().toLocaleDateString(
-                  undefined,
-                  {
-                    year: "numeric",
-
-                    month: "long",
-
-                    day: "numeric"
-                  }
-                )
-
-            };
-
-
-            letters.push(newLetter);
-
-          }
-
-
-          /*
-            Save changes.
-          */
-
-          saveLetters(letters);
-
-
-          /*
-            Clear the form.
-          */
-
-          this.reset();
-
-
-          /*
-            Restore normal button.
-          */
-
-          document
-            .querySelector(".submit")
-            .textContent =
-              "Leave your letter ♡";
-
-
-          /*
-            Return to letters.
-          */
-
-          showLetters();
-
-        }
-      );
-
-
-    /* =====================================================
-       DISPLAY SECRET LETTERS
-    ===================================================== */
-
-    function renderLetters() {
-
-
-      const grid =
-
-        document
-          .getElementById("letterGrid");
-
-
-      const empty =
-
-        document
-          .getElementById("emptyState");
-
-
-      const letters =
-        getLetters();
-
-
-      grid.innerHTML = "";
-
-
-      /* No letters yet */
-
-      if (letters.length === 0) {
-
-        empty.style.display =
-          "block";
-
-        return;
-
-      }
-
-
-      empty.style.display =
-        "none";
-
-
-      /*
-        Letters now appear in the
-        original order they were added.
-
-        So the first letter is 01,
-        the second is 02,
-        the third is 03,
-        and so on.
-
-        There is NO 16-letter limit.
-      */
-
-      letters.forEach(
-
-        function(letter, index) {
-
-
-          const card =
-            document.createElement("article");
-
-
-          card.className =
-            "letter-card";
-
-
-          /*
-            ONLY THE NUMBER IS VISIBLE.
-
-            The person's name and message
-            are intentionally hidden.
-          */
-
-          const number =
-            document.createElement("div");
-
-
-          number.className =
-            "letter-number";
-
-
-          number.textContent =
-
-            String(
-              index + 1
-            ).padStart(2, "0");
-
-
-          /*
-            Secret little instruction.
-          */
-
-          const hint =
-            document.createElement("div");
-
-
-          hint.className =
-            "secret-hint";
-
-
-          hint.textContent =
-            "open me ♡";
-
-
-          card.appendChild(number);
-
-          card.appendChild(hint);
-
-
-          /*
-            Click the mysterious card
-            to reveal the actual letter.
-          */
-
-          card.addEventListener(
-
-            "click",
-
-            function() {
-
-              openLetter(letter);
-
-            }
-
-          );
-
-
-          grid.appendChild(card);
-
-        }
-
-      );
-
-    }
-
-
-    /* =====================================================
-       OPEN LETTER
-    ===================================================== */
-
-    function openLetter(letter) {
-
-
-      /*
-        Remember which letter is open.
-        This is needed for edit/delete.
-      */
-
-      currentLetterId =
-        letter.id;
-
-
-      document
-        .getElementById("modalNumber")
-        .textContent =
-          "a letter for shashie ♡";
-
-
-      document
-        .getElementById("modalName")
-        .textContent =
-          "from " + letter.name;
-
-
-      document
-        .getElementById("modalMessage")
-        .textContent =
-          letter.message;
-
-
-      document
-        .getElementById("letterModal")
-        .classList.add("show");
-
-
-      document.body.style.overflow =
-        "hidden";
-
-    }
-
-
-    /* =====================================================
-       EDIT CURRENT LETTER
-    ===================================================== */
-
-    function editCurrentLetter() {
-
-
-      if (currentLetterId === null) {
-
-        return;
-
-      }
-
-
-      const letters =
-        getLetters();
-
-
-      const letter =
-        letters.find(
-
-          function(item) {
-
-            return item.id ===
-              currentLetterId;
-
-          }
-
-        );
-
-
-      if (!letter) {
-
-        return;
-
-      }
-
-
-      /*
-        Close the popup.
-      */
-
-      closeLetter();
-
-
-      /*
-        Open the writing page.
-      */
-
-      showWrite();
-
-
-      /*
-        Put the existing information
-        into the form.
-      */
-
-      document
-        .getElementById("name")
-        .value =
-          letter.name;
-
-
-      document
-        .getElementById("message")
-        .value =
-          letter.message;
-
-
-      /*
-        Tell the form that this is
-        an edit rather than a new letter.
-      */
-
-      document
-        .getElementById("letterForm")
-        .dataset.editingId =
-          letter.id;
-
-
-      /*
-        Change button text.
-      */
-
-      document
-        .querySelector(".submit")
-        .textContent =
-          "Save changes ♡";
-
-    }
-
-
-    /* =====================================================
-       DELETE / UNSEND CURRENT LETTER
-    ===================================================== */
-
-    function deleteCurrentLetter() {
-
-
-      if (currentLetterId === null) {
-
-        return;
-
-      }
-
-
-      /*
-        Ask for confirmation first.
-      */
-
-      const confirmed =
-
-        confirm(
-          "Are you sure you want to unsend this letter? ♡\n\nThis cannot be undone."
-        );
-
-
-      if (!confirmed) {
-
-        return;
-
-      }
-
-
-      let letters =
-        getLetters();
-
-
-      /*
-        Remove only the selected letter.
-      */
-
-      letters =
-        letters.filter(
-
-          function(letter) {
-
-            return letter.id !==
-              currentLetterId;
-
-          }
-
-        );
-
-
-      /*
-        Save the new list.
-      */
-
-      saveLetters(letters);
-
-
-      /*
-        Reset current letter.
-      */
-
-      currentLetterId =
-        null;
-
-
-      /*
-        Close popup.
-      */
-
-      closeLetter();
-
-
-      /*
-        Refresh the letter cards.
-      */
-
-      renderLetters();
-
-    }
-
-
-    /* =====================================================
-       CLOSE LETTER
-    ===================================================== */
-
-    function closeLetter() {
-
-
-      document
-        .getElementById("letterModal")
-        .classList.remove("show");
-
-
-      document.body.style.overflow =
-        "";
-
-    }
-
-
-    /* =====================================================
-       CLOSE WHEN CLICKING OUTSIDE
-    ===================================================== */
-
-    function closeModalOutside(event) {
-
-
-      if (
-
-        event.target ===
-        document.getElementById(
-          "letterModal"
-        )
-
-      ) {
-
-        closeLetter();
-
-      }
-
-    }
-
-
-    /* =====================================================
-       ESC KEY
-    ===================================================== */
-
-    document.addEventListener(
-
-      "keydown",
-
-      function(event) {
-
-        if (event.key === "Escape") {
-
-          closeLetter();
-
-        }
-
-      }
-
-    );
-
-
-    /* =====================================================
-       INITIAL PAGE
-    ===================================================== */
-
-    document
-      .getElementById("letters")
-      .style.display = "none";
-
-
-    document
-      .getElementById("write")
-      .style.display = "none";
-
-<!-- =====================================================
-       JAVASCRIPT
+       JAVASCRIPT (FIREBASE CONNECTED)
   ====================================================== -->
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.x.x/firebase-app.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.x.x/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.x.x/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAAUROMmSBP-JwtSaVR9cY3L1KqqNK9NOQ",
@@ -2785,8 +1982,197 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // [Your existing JavaScript functions like showLetters(), getLetters(), etc., go right below here]
+    let currentLetterId = null;
 
+    window.hideAllPages = function() {
+      document.getElementById("home").style.display = "none";
+      document.querySelector(".intro").style.display = "none";
+      document.getElementById("letters").style.display = "none";
+      document.getElementById("write").style.display = "none";
+      document.querySelector(".closing").style.display = "none";
+    };
+
+    window.showLetters = function() {
+      hideAllPages();
+      document.getElementById("letters").style.display = "block";
+      renderLetters();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    window.showWrite = function() {
+      hideAllPages();
+      document.getElementById("write").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setTimeout(function() {
+        document.getElementById("name").focus();
+      }, 300);
+    };
+
+    window.goHome = function() {
+      hideAllPages();
+      document.getElementById("home").style.display = "flex";
+      document.querySelector(".intro").style.display = "block";
+      document.querySelector(".closing").style.display = "flex";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    async function getLetters() {
+      try {
+        const querySnapshot = await getDocs(collection(db, "letters"));
+        let letters = [];
+        querySnapshot.forEach((docSnap) => {
+          letters.push({ firebaseId: docSnap.id, ...docSnap.data() });
+        });
+        letters.sort((a, b) => a.id - b.id);
+        return letters;
+      } catch (error) {
+        console.error("Error getting letters: ", error);
+        return [];
+      }
+    }
+
+    document.getElementById("letterForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!name || !message) return;
+
+      const editingFirebaseId = this.dataset.editingFirebaseId;
+
+      if (editingFirebaseId) {
+        try {
+          await updateDoc(doc(db, "letters", editingFirebaseId), {
+            name: name,
+            message: message
+          });
+          delete this.dataset.editingFirebaseId;
+        } catch (error) {
+          console.error("Error updating document: ", error);
+        }
+      } else {
+        try {
+          const newLetter = {
+            id: Date.now(),
+            name: name,
+            message: message,
+            date: new Date().toLocaleDateString(undefined, {
+              year: "numeric",
+              month: "long",
+              day: "numeric"
+            })
+          };
+          await addDoc(collection(db, "letters"), newLetter);
+        } catch (error) {
+          console.error("Error adding document: ", error);
+        }
+      }
+
+      this.reset();
+      document.querySelector(".submit").textContent = "Leave your letter ♡";
+      showLetters();
+    });
+
+    window.renderLetters = async function() {
+      const grid = document.getElementById("letterGrid");
+      const empty = document.getElementById("emptyState");
+
+      const letters = await getLetters();
+      grid.innerHTML = "";
+
+      if (letters.length === 0) {
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+
+      letters.forEach(function(letter, index) {
+        const card = document.createElement("article");
+        card.className = "letter-card";
+
+        const number = document.createElement("div");
+        number.className = "letter-number";
+        number.textContent = String(index + 1).padStart(2, "0");
+
+        const hint = document.createElement("div");
+        hint.className = "secret-hint";
+        hint.textContent = "open me ♡";
+
+        card.appendChild(number);
+        card.appendChild(hint);
+
+        card.addEventListener("click", function() {
+          openLetter(letter);
+        });
+
+        grid.appendChild(card);
+      });
+    };
+
+    window.openLetter = function(letter) {
+      currentLetterId = letter.firebaseId;
+
+      document.getElementById("modalNumber").textContent = "a letter for shashie ♡";
+      document.getElementById("modalName").textContent = "from " + letter.name;
+      document.getElementById("modalMessage").textContent = letter.message;
+      document.getElementById("letterModal").classList.add("show");
+      document.body.style.overflow = "hidden";
+    };
+
+    window.editCurrentLetter = async function() {
+      if (!currentLetterId) return;
+
+      const letters = await getLetters();
+      const letter = letters.find(item => item.firebaseId === currentLetterId);
+
+      if (!letter) return;
+
+      closeLetter();
+      showWrite();
+
+      document.getElementById("name").value = letter.name;
+      document.getElementById("message").value = letter.message;
+      document.getElementById("letterForm").dataset.editingFirebaseId = letter.firebaseId;
+      document.querySelector(".submit").textContent = "Save changes ♡";
+    };
+
+    window.deleteCurrentLetter = async function() {
+      if (!currentLetterId) return;
+
+      const confirmed = confirm("Are you sure you want to unsend this letter? ♡\n\nThis cannot be undone.");
+      if (!confirmed) return;
+
+      try {
+        await deleteDoc(doc(db, "letters", currentLetterId));
+        currentLetterId = null;
+        closeLetter();
+        renderLetters();
+      } catch (error) {
+        console.error("Error removing document: ", error);
+      }
+    };
+
+    window.closeLetter = function() {
+      document.getElementById("letterModal").classList.remove("show");
+      document.body.style.overflow = "";
+    };
+
+    window.closeModalOutside = function(event) {
+      if (event.target === document.getElementById("letterModal")) {
+        closeLetter();
+      }
+    };
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        closeLetter();
+      }
+    });
+
+    document.getElementById("letters").style.display = "none";
+    document.getElementById("write").style.display = "none";
   </script>
 
 </body>
