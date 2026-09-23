@@ -700,6 +700,11 @@
 <body>
 
   <!-- =====================================================
+       BACKGROUND MUSIC (BGM)
+  ====================================================== -->
+  <audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
+
+  <!-- =====================================================
        FLOATING PETALS
   ====================================================== -->
   <div class="petals">
@@ -737,7 +742,7 @@
 
   <!-- =====================================================
        INTRO
-  ====================================================== -->
+  ===================================================== -->
   <section class="intro">
     <div class="section-label">For someone very special</div>
     <h2>Our<br>Shashie</h2>
@@ -746,7 +751,7 @@
 
   <!-- =====================================================
        LETTERS
-  ====================================================== -->
+  ===================================================== -->
   <section class="letters" id="letters">
     <button class="back-button" onclick="goHome()">← back home</button>
     <div class="letters-header">
@@ -823,7 +828,7 @@
 
   <!-- =====================================================
        FIREBASE & JAVASCRIPT
-  ====================================================== -->
+  ===================================================== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -842,6 +847,7 @@
     const db = getFirestore(app);
 
     let currentLetterId = null;
+    const bgmAudio = document.getElementById("bgm");
 
     window.hideAllPages = function() {
       document.getElementById("home").style.display = "none";
@@ -854,6 +860,12 @@
     window.showLetters = async function() {
       hideAllPages();
       document.getElementById("letters").style.display = "block";
+      
+      // Play audio linked to user click
+      bgmAudio.play().catch(error => {
+        console.log("Audio play blocked or requires user interaction", error);
+      });
+
       await renderLetters();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
