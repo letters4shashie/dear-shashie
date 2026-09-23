@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dear Shashie ♡</title>
 
-  <!-- =========================
+  <!-- =====================================================
        FONTS
-  ========================== -->
+  ===================================================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
@@ -136,8 +136,10 @@
 
     .hero-flower {
       position: absolute;
-      font-size: 150px;
-      opacity: .13;
+      width: 130px;
+      height: 130px;
+      opacity: .25;
+      object-fit: contain;
     }
 
     .flower-one { top: 7%; left: 4%; transform: rotate(-20deg); }
@@ -393,9 +395,12 @@
     }
 
     .empty-flower {
-      font-size: 70px;
+      width: 70px;
+      height: 70px;
       opacity: .6;
-      margin-bottom: 20px;
+      margin: 0 auto 20px;
+      object-fit: contain;
+      display: block;
     }
 
     .empty-state h3 {
@@ -431,12 +436,16 @@
     }
 
     .form-wrapper::after {
-      content: "🌸";
+      content: "";
       position: absolute;
       right: 25px;
       bottom: 20px;
+      width: 75px;
+      height: 75px;
+      background-image: url('peony.png');
+      background-size: contain;
+      background-repeat: no-repeat;
       opacity: .18;
-      font-size: 80px;
       pointer-events: none;
     }
 
@@ -560,11 +569,12 @@
       margin-bottom: 12px;
     }
 
-    .modal-name {
+    /* Swapped: "with love" is now at the top in a sweet soft styling */
+    .modal-top-love {
       font-family: "Parisienne", cursive;
       color: var(--rose);
-      font-size: 40px;
-      margin-bottom: 25px;
+      font-size: 28px;
+      margin-bottom: 15px;
     }
 
     .modal-message {
@@ -573,12 +583,13 @@
       line-height: 1.8;
       white-space: pre-wrap;
       color: #60434c;
+      margin-bottom: 25px;
     }
 
+    /* Swapped: "from [name]" is now at the bottom as the signature */
     .modal-signature {
-      margin-top: 35px;
       font-family: "Parisienne", cursive;
-      font-size: 27px;
+      font-size: 40px;
       color: var(--burgundy);
     }
 
@@ -714,8 +725,8 @@
        HERO
   ====================================================== -->
   <section class="hero" id="home">
-    <div class="hero-flower flower-one">🌸</div>
-    <div class="hero-flower flower-two">🌸</div>
+    <img src="peony.png" alt="Peony Flower" class="hero-flower flower-one">
+    <img src="peony.png" alt="Peony Flower" class="hero-flower flower-two">
     <div class="hero-content">
       <div class="eyebrow">hi Shashie babie, Happy Graduation !!</div>
       <h1>Dear <span class="script">Shashie</span></h1>
@@ -747,7 +758,7 @@
     <div class="letter-grid" id="letterGrid"></div>
 
     <div class="empty-state" id="emptyState">
-      <div class="empty-flower">🌸</div>
+      <img src="peony.png" alt="Peony Flower" class="empty-flower">
       <h3>The first letter is waiting.</h3>
       <p>Be the first person to leave Shashie a little piece of love.</p>
       <br>
@@ -799,9 +810,9 @@
     <div class="letter-paper">
       <button class="close-modal" onclick="closeLetter()" aria-label="Close letter">×</button>
       <div class="modal-number" id="modalNumber"></div>
-      <div class="modal-name" id="modalName"></div>
+      <div class="modal-top-love">with love ♡</div>
       <div class="modal-message" id="modalMessage"></div>
-      <div class="modal-signature">with love ♡</div>
+      <div class="modal-signature" id="modalSignature"></div>
 
       <div class="letter-actions">
         <button type="button" class="letter-action-button edit-letter-button" onclick="editCurrentLetter()">✏️ edit letter</button>
@@ -871,7 +882,6 @@
         querySnapshot.forEach((docSnap) => {
           letters.push({ id: docSnap.id, ...docSnap.data() });
         });
-        // Sort by timestamp or creation order if saved, otherwise keep as is
         letters.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
         return letters;
       } catch (error) {
@@ -950,8 +960,8 @@
     window.openLetter = function(letter) {
       currentLetterId = letter.id;
       document.getElementById("modalNumber").textContent = "a letter for shashie ♡";
-      document.getElementById("modalName").textContent = "from " + letter.name;
       document.getElementById("modalMessage").textContent = letter.message;
+      document.getElementById("modalSignature").textContent = "from " + letter.name;
       document.getElementById("letterModal").classList.add("show");
       document.body.style.overflow = "hidden";
     }
